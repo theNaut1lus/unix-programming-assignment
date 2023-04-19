@@ -1,6 +1,7 @@
 #!/bin/env python3
 
 import argparse
+import sys
 
 def check_file(hosts_file):
     try:
@@ -22,7 +23,7 @@ parser = argparse.ArgumentParser(description='Processing hosts files')
 
 parser.add_argument("-a", "--all", action="store_true")
 parser.add_argument("-d", "--domain", action="store")
-parser.add_argument("-c", "--classes", action="store_true")
+parser.add_argument("-c", "--classes", action="store")
 parser.add_argument("-v", "--version", action="store_true")
 parser.add_argument("file", action="store")
 
@@ -60,7 +61,35 @@ elif(args.domain):
         print("Total hosts: " + str(count))
 
 elif(args.classes):
-    print("Class")
+    check_class = args.classes
+    min_range = 0
+    max_range = 0
+    if check_class == 'A':
+        print("Class A")
+        min_range = 0
+        max_range = 127
+    elif(check_class == 'B'):
+        print("Class B")
+        min_range = 128
+        max_range = 191
+    elif(check_class == 'C'):
+        print("Class C")
+        min_range = 192
+        max_range = 255
+    else:
+        print("invalid class")
+        exit(1)
+    for eachResult in split_result:
+        ip_result = int(eachResult[0].split('.')[0])
+        # print(ip_result)
+        for i in range(min_range,max_range+1):
+            # print(f'Checking {i} against {ip_result}')
+            if i == (ip_result):
+                # print(ip_result)
+                print(result[split_result.index(eachResult)])
+            else:
+                continue
+
 elif(args.version):
     print("Version")
 else:
