@@ -2,6 +2,7 @@
 
 import argparse
 import sys
+import time
 
 def check_file(hosts_file):
     try:
@@ -18,7 +19,7 @@ def check_file(hosts_file):
         print("File not found")
         exit(1)
 
-parser = argparse.ArgumentParser(description='Processing hosts files')
+parser = argparse.ArgumentParser(description='Processing hosts files based on various different arguments')
 
 
 parser.add_argument("-a", "--all", action="store_true")
@@ -62,8 +63,8 @@ elif(args.domain):
 
 elif(args.classes):
     check_class = args.classes
-    min_range = 0
-    max_range = 0
+    min_range = -sys.maxsize
+    max_range = sys.maxsize
     if check_class == 'A':
         print("Class A")
         min_range = 0
@@ -91,7 +92,13 @@ elif(args.classes):
                 continue
 
 elif(args.version):
-    print("Version")
+    first_name = "Sidak"
+    last_name = "Aulakh"
+    student_id = "24870952"
+    date_of_completion = time.localtime()
+    print(f"Name: {first_name} {last_name}")
+    print(f"Student ID: {student_id}")
+    print(f"Date of completion: {date_of_completion.tm_mday}/{date_of_completion.tm_mon}/{date_of_completion.tm_year}")
 else:
     print("No arguments")
 
