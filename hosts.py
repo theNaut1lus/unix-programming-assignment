@@ -58,23 +58,25 @@ elif(args.domain):
             continue
     if count == 0:
         print("No hosts in the given domain")
+        exit(1)
     else:
         print("Total hosts: " + str(count))
 
 elif(args.classes):
+    count = 0
     check_class = args.classes
     min_range = -sys.maxsize
     max_range = sys.maxsize
     if check_class == 'A':
-        print("Class A")
+        # print("Class A")
         min_range = 0
         max_range = 127
     elif(check_class == 'B'):
-        print("Class B")
+        # print("Class B")
         min_range = 128
         max_range = 191
     elif(check_class == 'C'):
-        print("Class C")
+        # print("Class C")
         min_range = 192
         max_range = 255
     else:
@@ -86,10 +88,14 @@ elif(args.classes):
         for i in range(min_range,max_range+1):
             # print(f'Checking {i} against {ip_result}')
             if i == (ip_result):
+                count += 1
+                # print(count)
                 # print(ip_result)
                 print(result[split_result.index(eachResult)])
             else:
                 continue
+        if count == 0:
+            print("No hosts in the given class")
 
 elif(args.version):
     first_name = "Sidak"
