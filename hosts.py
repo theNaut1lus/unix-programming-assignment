@@ -102,7 +102,8 @@ elif(args.version):
     last_name = "Aulakh"
     student_id = "24870952"
     date_of_completion = time.localtime()
-    print(f"Name: {first_name} {last_name}")
+    print(f"First Name: {first_name}")
+    print(f"Last Name: {last_name}")
     print(f"Student ID: {student_id}")
     print(f"Date of completion: {date_of_completion.tm_mday}/{date_of_completion.tm_mon}/{date_of_completion.tm_year}")
 else:
