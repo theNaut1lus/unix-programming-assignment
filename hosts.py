@@ -45,12 +45,19 @@ if(args.all):
             print(eachResult[1])
 
 elif(args.domain):
+    domain = args.domain
+    count = 0
     # print(args.domain)
     for eachLine in result:
-        if args.domain in eachLine:
+        if domain in eachLine:
+            count += 1
             print(eachLine)
         else:
             continue
+    if count == 0:
+        print("No hosts in the given domain")
+    else:
+        print("Total hosts: " + str(count))
 
 elif(args.classes):
     print("Class")
