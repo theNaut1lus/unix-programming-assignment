@@ -1,9 +1,12 @@
 #!/bin/env python3
 
+# imports
+
 import argparse
 import sys
 import time
 
+# function to check if file exists and save contents to a list and a split list then return both
 def check_file(hosts_file):
     try:
         with open(hosts_file, 'r') as open_file:
@@ -19,8 +22,11 @@ def check_file(hosts_file):
         print("File not found")
         exit(1)
 
+# initialize the parser
+
 parser = argparse.ArgumentParser(description='Processing hosts files based on various different arguments')
 
+# added arguments to the parser for the different options
 
 parser.add_argument("-a", "--all", action="store_true")
 parser.add_argument("-d", "--domain", action="store")
@@ -28,15 +34,22 @@ parser.add_argument("-c", "--classes", action="store")
 parser.add_argument("-v", "--version", action="store_true")
 parser.add_argument("file", action="store")
 
+# parse the arguments for further processing based on option pased
+
 args = parser.parse_args()
 
 # print(args)
+
+# check file and then fetch file contents (both lines and lines split by spaces) to be used for further processing depending on options passed
 
 result,split_result = check_file(args.file)
 
 # print(result)
 # print(split_result)
 
+# check for options passed and process accordingly
+
+# option passed: -a --all
 if(args.all):
     # print(result)
     if result == []:
@@ -46,6 +59,7 @@ if(args.all):
         for eachResult in split_result: # type: ignore
             print(eachResult[1])
 
+# option passed: -d --domain [domain]
 elif(args.domain):
     domain = args.domain
     count = 0
@@ -62,6 +76,7 @@ elif(args.domain):
     else:
         print("Total hosts: " + str(count))
 
+# option passed: -c --classes [classes]
 elif(args.classes):
     count = 0
     check_class = args.classes
@@ -97,6 +112,7 @@ elif(args.classes):
         if count == 0:
             print("No hosts in the given class")
 
+# option passed: -v --version
 elif(args.version):
     first_name = "Sidak"
     last_name = "Aulakh"
