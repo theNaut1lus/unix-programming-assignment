@@ -1,4 +1,4 @@
-#!/bin/env python3
+#!/usr/bin/env python3
 
 # imports
 
@@ -15,6 +15,9 @@ def check_file(hosts_file):
             split_result = []
             result = []
             for x in open_file.readlines():
+                x = x.strip(
+                    "\n"
+                )  # strip trailing \n at the end of lines in text to avoid printing empty lines if they exist.
                 result.append(x)
                 split_result.append(x.split(" "))
             open_file.close()
@@ -78,7 +81,8 @@ elif args.domain:
         print("No hosts in the given domain")
         exit(1)
     else:
-        print("Total hosts: " + str(count))
+        exit(0)
+        # print("Total hosts found: " + str(count))
 
 # option passed: -c --classes [classes]
 elif args.classes:
@@ -113,8 +117,8 @@ elif args.classes:
                 print(result[split_result.index(eachResult)])
             else:
                 continue
-        if count == 0:
-            print("No hosts in the given class")
+    if count == 0:
+        print("No hosts in the given class")
 
 # option passed: -v --version
 elif args.version:
@@ -129,5 +133,7 @@ elif args.version:
         f"Date of completion: {date_of_completion.tm_mday}/{date_of_completion.tm_mon}/{date_of_completion.tm_year}"
     )
 else:
-    print("No arguments passed to the program, exiting..")
+    print(
+        "No or incorrect arguments passed to the program, please try again, exiting.."
+    )
     exit(1)
