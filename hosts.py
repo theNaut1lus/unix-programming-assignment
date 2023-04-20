@@ -6,25 +6,29 @@ import argparse
 import sys
 import time
 
+
 # function to check if file exists and save contents to a list and a split list then return both
 def check_file(hosts_file):
     try:
-        with open(hosts_file, 'r') as open_file:
+        with open(hosts_file, "r") as open_file:
             # print("File found")
             split_result = []
-            result=[]
+            result = []
             for x in open_file.readlines():
                 result.append(x)
-                split_result.append(x.split(' '))
+                split_result.append(x.split(" "))
             open_file.close()
             return result, split_result
     except FileNotFoundError:
         print("File not found")
         exit(1)
 
+
 # initialize the parser
 
-parser = argparse.ArgumentParser(description='Processing hosts files based on various different arguments')
+parser = argparse.ArgumentParser(
+    description="Processing hosts files based on various different arguments"
+)
 
 # added arguments to the parser for the different options
 
@@ -42,7 +46,7 @@ args = parser.parse_args()
 
 # check file and then fetch file contents (both lines and lines split by spaces) to be used for further processing depending on options passed
 
-result,split_result = check_file(args.file)
+result, split_result = check_file(args.file)
 
 # print(result)
 # print(split_result)
@@ -50,17 +54,17 @@ result,split_result = check_file(args.file)
 # check for options passed and process accordingly
 
 # option passed: -a --all
-if(args.all):
+if args.all:
     # print(result)
     if result == []:
         print("No hosts")
     else:
         print("Hostnames:")
-        for eachResult in split_result: # type: ignore
+        for eachResult in split_result:
             print(eachResult[1])
 
 # option passed: -d --domain [domain]
-elif(args.domain):
+elif args.domain:
     domain = args.domain
     count = 0
     # print(args.domain)
@@ -77,20 +81,20 @@ elif(args.domain):
         print("Total hosts: " + str(count))
 
 # option passed: -c --classes [classes]
-elif(args.classes):
+elif args.classes:
     count = 0
     check_class = args.classes
     min_range = -sys.maxsize
     max_range = sys.maxsize
-    if check_class == 'A':
+    if check_class == "A":
         # print("Class A")
         min_range = 0
         max_range = 127
-    elif(check_class == 'B'):
+    elif check_class == "B":
         # print("Class B")
         min_range = 128
         max_range = 191
-    elif(check_class == 'C'):
+    elif check_class == "C":
         # print("Class C")
         min_range = 192
         max_range = 255
@@ -98,9 +102,9 @@ elif(args.classes):
         print("invalid class")
         exit(1)
     for eachResult in split_result:
-        ip_result = int(eachResult[0].split('.')[0])
+        ip_result = int(eachResult[0].split(".")[0])
         # print(ip_result)
-        for i in range(min_range,max_range+1):
+        for i in range(min_range, max_range + 1):
             # print(f'Checking {i} against {ip_result}')
             if i == (ip_result):
                 count += 1
@@ -113,7 +117,7 @@ elif(args.classes):
             print("No hosts in the given class")
 
 # option passed: -v --version
-elif(args.version):
+elif args.version:
     first_name = "Sidak"
     last_name = "Aulakh"
     student_id = "24870952"
@@ -121,9 +125,9 @@ elif(args.version):
     print(f"First Name: {first_name}")
     print(f"Last Name: {last_name}")
     print(f"Student ID: {student_id}")
-    print(f"Date of completion: {date_of_completion.tm_mday}/{date_of_completion.tm_mon}/{date_of_completion.tm_year}")
+    print(
+        f"Date of completion: {date_of_completion.tm_mday}/{date_of_completion.tm_mon}/{date_of_completion.tm_year}"
+    )
 else:
-    print("No arguments")
-
-
-
+    print("No arguments passed to the program, exiting..")
+    exit(1)
