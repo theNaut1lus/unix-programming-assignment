@@ -1,4 +1,10 @@
-#!/usr/bin/env python3
+
+#!/bin/env/python3
+
+# Sidak Aulakh (Sid)
+# 24870952
+
+# This program is a command line tool that processes a hosts file and prints out the hostnames based on the options passed to the program.
 
 # imports
 
