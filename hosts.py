@@ -72,10 +72,13 @@ elif args.domain:
     domain = args.domain
     count = 0
     # print(args.domain)
-    for eachLine in result:
-        if domain in eachLine:
+    for eachResult in split_result:
+        # print(eachResult[1])
+        split_domain = eachResult[1].split(".")
+        # print(split_domain)
+        if domain in split_domain[-1]:
             count += 1
-            print(eachLine)
+            print(result[split_result.index(eachResult)])
         else:
             continue
     if count == 0:
