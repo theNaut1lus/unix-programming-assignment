@@ -1,5 +1,4 @@
-
-#!/bin/env/python3
+#!/usr/bin/env python3
 
 # Sidak Aulakh (Sid)
 # 24870952
